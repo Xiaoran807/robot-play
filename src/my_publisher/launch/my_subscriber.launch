@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="my_publisher" type="subscriber_cmd_vel.py" name="listener" output="screen">
+
+</node>
+</launch>

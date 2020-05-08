@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="my_publisher" type="publisher_cmd_vel.py" name="velocity_publisher_node" output="screen">
+
+</node>
+</launch>

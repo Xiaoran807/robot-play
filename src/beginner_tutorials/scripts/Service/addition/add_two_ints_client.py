@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+#http://wiki.ros.org/ROS/Tutorials/ExaminingServiceClient
 import sys
 import rospy
 from rospy_tutorials.srv import *

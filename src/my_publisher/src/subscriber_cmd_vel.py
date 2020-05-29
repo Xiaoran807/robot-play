@@ -8,7 +8,7 @@ def callback(data):
 def listener():
     rospy.init_node('listener',anonymous=True)
 
-    rospy.Subscriber('chatter',Int32,callback)
+    rospy.Subscriber('counter',Int32,callback)
 
     rospy.spin()
 

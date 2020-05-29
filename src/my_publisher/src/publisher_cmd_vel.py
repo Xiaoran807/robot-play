@@ -7,7 +7,7 @@ from std_msgs.msg import Int32
 class VelBase(object):
   _LABEL=''
 
-pub2=rospy.Publisher('chatter', Int32, queue_size=10)
+pub2=rospy.Publisher('counter', Int32, queue_size=10)
 def vel():
     count=0
     rate = rospy.Rate(1000)

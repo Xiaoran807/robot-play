@@ -126,6 +126,11 @@ target_link_libraries(changeVelocityofObject
    ${catkin_LIBRARIES}
  )
 
+add_executable(add_two_ints_server src/add_two_ints_server.cpp)
+add_dependencies(add_two_ints_server ${add_two_ints_server_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(add_two_ints_server
+   ${catkin_LIBRARIES}
+ )
 
 
 

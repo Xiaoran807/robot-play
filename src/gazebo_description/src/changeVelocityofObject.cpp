@@ -12,17 +12,15 @@ int main (int argc, char **argv)
 
   gazebo_msgs::SetModelState setmodelstate;
   gazebo_msgs::ModelState modelstate;
-  modelstate.model_name = "myObject";
+  modelstate.model_name = "simple_box";
   modelstate.reference_frame = "world";
-
   geometry_msgs::Twist model_twist;
-  model_twist.linear.x = 1.0;
-  model_twist.linear.y = 1;
+  model_twist.linear.x = .3;
+  model_twist.linear.y = 0;
   model_twist.linear.z = 0;
   model_twist.angular.x = 0;
   model_twist.angular.y = 0.0;
   model_twist.angular.z = 0.0;
-  
   geometry_msgs::Pose model_pose;
   model_pose.position.x=1;
   model_pose.position.y=1;
@@ -31,15 +29,30 @@ int main (int argc, char **argv)
   model_pose.orientation.y=0;
   model_pose.orientation.z=0;
   model_pose.orientation.w=0;
-
-
   modelstate.twist=model_twist;
   modelstate.pose=model_pose;
   setmodelstate.request.model_state = modelstate;
 
 
   gazebo_msgs::SetPhysicsProperties setPhysicsProperties;
+  setPhysicsProperties.request.time_step=0.001;
+  setPhysicsProperties.request.max_update_rate=1000.0;
+  setPhysicsProperties.request.gravity.x=0;
+  setPhysicsProperties.request.gravity.y=0;
   setPhysicsProperties.request.gravity.z=0;
+  setPhysicsProperties.request.ode_config.auto_disable_bodies=false;
+  setPhysicsProperties.request.ode_config.auto_disable_bodies= false;
+  setPhysicsProperties.request.ode_config.sor_pgs_precon_iters= 0;
+  setPhysicsProperties.request.ode_config.sor_pgs_iters= 50;
+  setPhysicsProperties.request.ode_config.sor_pgs_w=1.3;
+  setPhysicsProperties.request.ode_config.sor_pgs_rms_error_tol= 0.0;
+  setPhysicsProperties.request.ode_config.contact_surface_layer= 0.001;
+  setPhysicsProperties.request.ode_config.contact_max_correcting_vel= 100.0;
+  setPhysicsProperties.request.ode_config.cfm=0.0;
+  setPhysicsProperties.request.ode_config.erp= 0.2;
+  setPhysicsProperties.request.ode_config.max_contacts= 20;
+
+
 
 
   if (client.call(setmodelstate))

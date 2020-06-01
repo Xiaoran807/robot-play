@@ -11,6 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+  message_generation
 )
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -53,11 +54,7 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate services in the 'srv' folder
-# add_service_files(
-#   FILES
-#   Service1.srv
-#   Service2.srv
-# )
+
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -126,11 +123,6 @@ target_link_libraries(changeVelocityofObject
    ${catkin_LIBRARIES}
  )
 
-add_executable(add_two_ints_server src/add_two_ints_server.cpp)
-add_dependencies(add_two_ints_server ${add_two_ints_server_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(add_two_ints_server
-   ${catkin_LIBRARIES}
- )
 
 
 

@@ -1,5 +1,27 @@
 <robot name="simple_box">
-  <link name="my_box">
+ 
+ <!-- Colours for RVIZ for geometric elements -->
+    <material name="blue">
+        <color rgba="0 0 0.8 1"/>
+    </material>
+    <material name="red">
+        <color rgba="0.8 0 0 1"/>
+    </material>
+    <material name="green">
+        <color rgba="0 0.8 0 1"/>
+    </material>
+    <material name="grey">
+        <color rgba="0.75 0.75 0.75 1"/>
+    </material>
+    <material name="white">
+        <color rgba="1.0 1.0 1.0 1"/>
+    </material>
+    <material name="black">
+        <color rgba="0 0 0 1"/>
+    </material>
+
+
+ <link name="my_box">
     <inertial>
       <origin xyz="2 0 0" />
       <mass value="0.00001" />
@@ -20,5 +42,6 @@
   </link>
   <gazebo reference="my_box">
     <material>Gazebo/Blue</material>
+    <turnGravityOff>true</turnGravityOff>
   </gazebo>
 </robot>

@@ -123,7 +123,11 @@ target_link_libraries(changeVelocityofObject
    ${catkin_LIBRARIES}
  )
 
-
+add_executable(currentVelocityObject src/currentVelocityObject.cpp)
+add_dependencies(currentVelocityObject ${currentVelocityObject_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(currentVelocityObject
+   ${catkin_LIBRARIES}
+ )
 
 
 

@@ -3,14 +3,15 @@
 #include <gazebo_msgs/SetPhysicsProperties.h>
 #include <cstdlib>
 #include "std_msgs/String.h"
-#include <std_msgs/Int32.h>
+#include <std_msgs/Float32.h>
+#include <geometry_msgs/Twist.h>
 //I'm going to implement user-specified twist values later.
-  std_msgs::Int32 lin_data;
-void counterCallback(const std_msgs::Int32::ConstPtr& msg)
+  std_msgs::Float32 lin_data;
+void counterCallback(const geometry_msgs::Twist::ConstPtr& msg)
 {
-  ROS_INFO("%d", msg->data);// we are using ROS_INFO to print message data to screen 
+//  ROS_INFO("%d", msg->linear.x);// we are using ROS_INFO to print message data to screen 
 
-  lin_data.data=msg->data;
+  lin_data.data=msg->linear.x;
 }
 
 int main (int argc, char **argv)
@@ -43,7 +44,7 @@ int main (int argc, char **argv)
   modelstate.pose=model_pose;
   setmodelstate.request.model_state = modelstate;
 
-  ros::Subscriber sub = n.subscribe("counter", 1000, counterCallback);
+  ros::Subscriber sub = n.subscribe("cmd_vel", 1000, counterCallback);
 
 
 

@@ -116,10 +116,9 @@ include_directories(
  ${catkin_INCLUDE_DIRS}
 )
 
-
-add_executable(changeVelocityofObject src/changeVelocityofObject.cpp)
-add_dependencies(changeVelocityofObject ${changeVelocityofObject_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(changeVelocityofObject
+add_executable(currentVelocityHydrodynamics src/currentVelocityHydrodynamics.cpp)
+add_dependencies(currentVelocityHydrodynamics ${currentVelocityHydrodynamics_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(currentVelocityHydrodynamics
    ${catkin_LIBRARIES}
  )
 
@@ -129,6 +128,11 @@ target_link_libraries(currentVelocityObject
    ${catkin_LIBRARIES}
  )
 
+add_executable(simple_velocity_publisher src/simple_velocity_publisher.cpp)
+add_dependencies(simple_velocity_publisher ${simple_velocity_publisher_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(simple_velocity_publisher
+   ${catkin_LIBRARIES}
+ )
 
 
 

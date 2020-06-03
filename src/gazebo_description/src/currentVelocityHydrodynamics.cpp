@@ -22,10 +22,10 @@ int main (int argc, char **argv)
   ros::init(argc,argv,"robot_mover_mark_two");
   ros::NodeHandle n;
   ros::Rate loop_rate(10);
-  ros::Subscriber sub = n.subscribe("cmd_vel", 1, callback);
-  double x=-5;
+  ros::Subscriber sub = n.subscribe("/hydrodynamics/current_velocity", 1, callback);
+  double x=-10;
   double y=0;
-  double z=0;
+  double z=-8;
   ros::Time current_time, last_time;
   current_time=ros::Time::now();
   last_time=ros::Time::now();
@@ -47,7 +47,7 @@ int main (int argc, char **argv)
      geometry_msgs::Pose model_pose;
      model_pose.position.x=x;
      model_pose.position.y=y;
-     model_pose.position.z=z;
+     model_pose.position.z=-8;
      model_pose.orientation.x=0;
      model_pose.orientation.y=0;
      model_pose.orientation.z=0;

@@ -21,9 +21,9 @@ int main (int argc, char **argv)
 {
   ros::init(argc,argv,"robot_mover_mark_two");
   ros::NodeHandle n;
-  ros::Rate loop_rate(10);
+  ros::Rate loop_rate(20);
   ros::Subscriber sub = n.subscribe("/hydrodynamics/current_velocity", 1, callback);
-  double x=-10;
+  double x=-3;
   double y=0;
   double z=-8;
   ros::Time current_time, last_time;
@@ -45,8 +45,8 @@ int main (int argc, char **argv)
 
      ros::ServiceClient client = n.serviceClient<gazebo_msgs::SetModelState>("/gazebo/set_model_state");
      geometry_msgs::Pose model_pose;
-     model_pose.position.x=x;
-     model_pose.position.y=y;
+     model_pose.position.x=3*x;
+     model_pose.position.y=3*y;
      model_pose.position.z=-8;
      model_pose.orientation.x=0;
      model_pose.orientation.y=0;
@@ -63,7 +63,7 @@ int main (int argc, char **argv)
 
      gazebo_msgs::SetModelState setmodelstate;
      gazebo_msgs::ModelState modelstate;
-     modelstate.model_name = "simple_box";
+     modelstate.model_name = "objectUnderwater";
      modelstate.reference_frame = "world";
      modelstate.twist=model_twist;
      modelstate.pose=model_pose;

@@ -2,7 +2,7 @@
 
 <launch>
     
-    <arg name="x" default="0.0" />
+    <arg name="x" default="-3" />
     <arg name="y" default="0" />
     <arg name="z" default="0.1" />
     <arg name="roll" default="0"/>
@@ -11,7 +11,6 @@
     
     <arg name="urdf_robot_file" default="$(find gazebo_description)/urdf/object.urdf" />
     <arg name="robot_name" default="simple_box" />
-    
     <include file="$(find gazebo_description)/launch/spawn_box_urdf.launch">
         <arg name="x" value="$(arg x)" />
         <arg name="y" value="$(arg y)" />
@@ -19,7 +18,6 @@
         <arg name="roll" value="$(arg roll)"/>
         <arg name="pitch" value="$(arg pitch)"/>
         <arg name="yaw" value="$(arg yaw)" />
-        
         <arg name="urdf_robot_file" value="$(arg urdf_robot_file)" />
         <arg name="robot_name" value="$(arg robot_name)" />
     </include>

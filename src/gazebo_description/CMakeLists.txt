@@ -122,6 +122,17 @@ target_link_libraries(currentVelocityHydrodynamics
    ${catkin_LIBRARIES}
  )
 
+add_executable(velocitySimpleBox src/velocitySimpleBox.cpp)
+add_dependencies(velocitySimpleBox ${velocitySimpleBox_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(velocitySimpleBox
+   ${catkin_LIBRARIES}
+ )
+
+add_executable(velocitySimpleBoxTopic src/velocitySimpleBoxTopic.cpp)
+add_dependencies(velocitySimpleBoxTopic ${velocitySimpleBoxTopic_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(velocitySimpleBoxTopic
+   ${catkin_LIBRARIES}
+ )
 
 add_executable(simple_velocity_publisher src/simple_velocity_publisher.cpp)
 add_dependencies(simple_velocity_publisher ${simple_velocity_publisher_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})

@@ -1,5 +1,8 @@
-currentVelocityHydrodynamics.cpp moves the rexrov continuously
-currentVelocityTImer.cpp used a timed service to move box and then restarted at its initial position
-simple_velocity_publisher.cpp publishes velocity command for box
-velocitySimpleBOx.cpp uses service to update position, but not velocity
-velocitySImpleBoxTopic.cpp use topic to update position and velocity
+to simulate the box in gazebo
+
+1. roslaunch gazebo_description main.launch
+2. rosrun gazebo_description velocitySimpleBox (use service) velocitySimpleBoxTopic (use topic) --------is moves the box as expected.
+3. rosrun gazebo_description simple_velocityublisher
+
+
+publish_odom.py will just publish position topics

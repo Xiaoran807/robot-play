@@ -9,12 +9,12 @@ int main(int argc, char** argv) {// We start the main C++ program
     ros::init(argc, argv, "move_forward");// We initiate a ROS node called topic_publisher
     ros::NodeHandle nh;// We create a handler for the node. This handler will actually do the initialization of the node.
 
-    ros::Publisher pub = nh.advertise<geometry_msgs::TwistStamped>("cmd_vel", 1000); //We create a publisher called counter which uses std_msgs of Int32 type to publish 1000
+    ros::Publisher pub = nh.advertise<geometry_msgs::TwistStamped>("cmd_velBox", 1000); //We create a publisher called counter which uses std_msgs of Int32 type to publish 1000
     ros::Rate loop_rate(2);// We create a Rate object of 2Hz
 
     geometry_msgs::TwistStamped move;//We initializing count variable.
-    move.twist.linear.x = 0.2;// we are setting Count data to zero
-    move.twist.linear.y = 0;// we are setting Count data to zero
+    move.twist.linear.x = 0;// we are setting Count data to zero
+    move.twist.linear.y = 0.1;// we are setting Count data to zero
     move.twist.linear.z = 0;// we are setting Count data to zero
     move.twist.angular.x = 0;
     move.twist.angular.y = 0.0;

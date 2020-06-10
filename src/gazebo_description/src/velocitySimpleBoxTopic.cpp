@@ -23,7 +23,7 @@ int main (int argc, char **argv)
   ros::init(argc,argv,"simpleBox");
   ros::NodeHandle n;
   ros::Rate loop_rate(1);
-  ros::Subscriber sub = n.subscribe("cmd_vel", 1, callback);
+  ros::Subscriber sub = n.subscribe("cmd_velBox", 1, callback);
   ros::Publisher pose_pub_ = n.advertise<gazebo_msgs::ModelState>("gazebo/set_model_state", 1);
   double x=-5;
   double y=0;

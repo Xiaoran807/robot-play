@@ -11,8 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
-  genmsg
-  #message_generation
+  message_generation
 )
 
 ## System dependencies are found with CMake's conventions
@@ -133,13 +132,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-  add_executable(add_two_ints_server src/add_two_ints_server.cpp)
-  add_dependencies(add_two_ints_server ${add_two_ints_server_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-  target_link_libraries(add_two_ints_server ${catkin_LIBRARIES})
 
-  add_executable(add_two_ints_client src/add_two_ints_client.cpp)
-  add_dependencies(add_two_ints_client ${add_two_ints_client_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-  target_link_libraries(add_two_ints_client ${catkin_LIBRARIES})
 
 
 

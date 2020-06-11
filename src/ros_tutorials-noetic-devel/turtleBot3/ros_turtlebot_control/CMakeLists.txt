@@ -130,6 +130,13 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
+
+add_executable(poseGoal src/poseGoal.cpp)
+add_dependencies(poseGoal ${poseGoal_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(poseGoal
+   ${catkin_LIBRARIES}
+ )
+
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/fychen_hw3.cpp

@@ -139,6 +139,6 @@ if __name__ == "__main__":
 ```
 
 Run it to test the ROS services:
-> $ rosrun ros_turtlebot_control turtlebot_client.py   
+> $    
 
 You may also copy the file to your own project repo, and then import `class TurtleClient` to use the python API functions.

@@ -137,6 +137,11 @@ target_link_libraries(poseGoal
    ${catkin_LIBRARIES}
  )
 
+ catkin_install_python(PROGRAMS
+   src/poseGoal.py
+   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+ )
+
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/fychen_hw3.cpp

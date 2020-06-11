@@ -90,7 +90,7 @@ Start this turtlebot control server:
 ``` 
 rosrun ros_turtlebot_control turtlebot_server.py   
 ```
-
+rosrun ros_turtlebot_control poseGoal to let turtlebot to follow box
 ## Call services from command line
 
 * Move to (x=-1, y=-1, theta=1.57):

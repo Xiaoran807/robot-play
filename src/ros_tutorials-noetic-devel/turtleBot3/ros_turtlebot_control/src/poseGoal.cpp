@@ -11,11 +11,22 @@
   std_msgs::Float32 pose_x;
   std_msgs::Float32 pose_y;
   std_msgs::Float32 theta;
+  std_msgs::Float32 ori_x;
+  std_msgs::Float32 ori_y;
+  std_msgs::Float32 ori_z;
+  std_msgs::Float32 ori_w;
+
+
 void callback(const nav_msgs::Odometry::ConstPtr& msg)
 {
   pose_x.data=msg->pose.pose.position.x;
   pose_y.data=msg->pose.pose.position.y;
   theta.data=0;
+  ori_x.data=msg->pose.pose.orientation.x;
+  ori_y.data=msg->pose.pose.orientation.y;
+  ori_z.data=msg->pose.pose.orientation.z;
+  ori_w.data=msg->pose.pose.orientation.w;
+
 }
 
 

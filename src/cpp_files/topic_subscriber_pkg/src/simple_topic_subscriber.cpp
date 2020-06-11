@@ -7,6 +7,8 @@
 void counterCallback(const std_msgs::Int32::ConstPtr& msg)
 {
   ROS_INFO("%d", msg->data);// we are using ROS_INFO to print message data to screen
+  std_msgs::Int32 lin_data;
+  lin_data.data=msg->data;
 }
 
 int main(int argc, char** argv) {

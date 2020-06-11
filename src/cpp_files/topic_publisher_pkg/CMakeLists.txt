@@ -131,9 +131,6 @@ include_directories(
 add_executable(simple_topic_publisher src/simple_topic_publisher.cpp)
 add_dependencies(simple_topic_publisher ${simple_topic_publisher_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
-add_executable(simple_velocity_publisher src/simple_velocity_publisher.cpp)
-add_dependencies(simple_velocity_publisher ${simple_velocity_publisher_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
@@ -154,9 +151,6 @@ add_dependencies(simple_velocity_publisher ${simple_velocity_publisher_EXPORTED_
 #   ${catkin_LIBRARIES}
 # )
 target_link_libraries(simple_topic_publisher
-   ${catkin_LIBRARIES}
- )
- target_link_libraries(simple_velocity_publisher
    ${catkin_LIBRARIES}
  )
 #############

@@ -21,7 +21,7 @@ int main (int argc, char **argv)
 {
   ros::init(argc,argv,"simpleBox");
   ros::NodeHandle n;
-  ros::Rate loop_rate(1);
+  ros::Rate loop_rate(10);
   ros::Subscriber sub = n.subscribe("cmd_velBox", 1, callback);
   double x=-5;
   double y=0;

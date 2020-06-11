@@ -13,12 +13,12 @@ int main(int argc, char** argv) {// We start the main C++ program
     ros::Rate loop_rate(2);// We create a Rate object of 2Hz
 
     geometry_msgs::TwistStamped move;//We initializing count variable.
-    move.twist.linear.x = 0;// we are setting Count data to zero
-    move.twist.linear.y = 0.1;// we are setting Count data to zero
+    move.twist.linear.x = .1;// we are setting Count data to zero
+    move.twist.linear.y = .1;// we are setting Count data to zero
     move.twist.linear.z = 0;// we are setting Count data to zero
     move.twist.angular.x = 0;
-    move.twist.angular.y = 0.0;
-    move.twist.angular.z = 0.0;
+    move.twist.angular.y = 0;
+    move.twist.angular.z = 0.1;
     while (ros::ok())//Endless loop to publish the count variable
     {
         pub.publish(move);// Publish the message within the 'count' variable

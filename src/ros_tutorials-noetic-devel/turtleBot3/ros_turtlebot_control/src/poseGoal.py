@@ -7,14 +7,23 @@ from gazebo_msgs.msg import ModelState
 from gazebo_msgs.srv import SetModelState
 from ros_turtlebot_control.srv import *
 from nav_msgs.msg import Odometry
+import sys
+sys.path.insert(1, '/home/xiaoran/catkin_ws/src/robot-play/trunk/src/ros_tutorials-noetic-devel/turtleBot3/ros_turtlebot_control/utils')
+from geo_maths import *
+
 
 pose_x=Float32();
 pose_y=Float32();
 theta=Float32();
+pose=Pose();
 def callback(data):
-    pose_x.data=data.pose.pose.position.x;
-    pose_y.data=data.pose.pose.position.y;
-    theta.data=0;
+    pose=pose_to_xytheta(data.pose.pose);
+    pose_x.data=pose[0];
+    pose_y.data=pose[1];
+    #pose_x.data=data.pose.pose.position.x;
+    #pose_y.data=data.pose.pose.position.y;
+    theta.data=pose[2];
+
 
 def main():
     rospy.init_node('set_vel_py')
@@ -23,7 +32,7 @@ def main():
     while not rospy.is_shutdown():  
        x=pose_x.data;
        y=pose_y.data;
-       the_ta=0;
+       the_ta=theta.data;
        moveToPose=MoveToPoseRequest()
        moveToPose.x=x;
        moveToPose.y=y;

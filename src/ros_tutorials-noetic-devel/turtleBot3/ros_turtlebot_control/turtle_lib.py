@@ -9,11 +9,11 @@ import utils.geo_maths as geo_maths
 from utils.commons import dict2class, read_yaml_file
 from utils.pid_controller import PidController
 
-from geometry_msgs.msg import Point, Pose, Twist
+from geometry_msgs.msg import Point, Pose, Twist, Vector3
 from gazebo_msgs.srv import SetModelState
 from gazebo_msgs.msg import ModelState, ModelStates
 from nav_msgs.msg import Odometry
-from std_msgs.msg import Empty
+from std_msgs.msg import Empty, Float32
 from tf.transformations import euler_from_quaternion
 import tf
 
@@ -129,6 +129,10 @@ class Turtle(object):
         # Moving state: for starting/stopping control loop in multi threading.
         self._is_moving = False
         self._enable_moving = True
+	self._error_pub=rospy.Publisher('error', Vector3, queue_size=10)
+        self._error=np.zeros(3)
+        #self._error_pub=rospy.Publisher('error', Float32, queue_size=10)
+        #self._error=np.zeros(1)
 
     def stop_moving(self):
         if self._is_moving:
@@ -322,6 +326,18 @@ class Turtle(object):
             abs(geo_maths.pi2pi(theta - theta_goal)) < theta_tol
         return b1 and b2 and b3
 
+
+    def error(self, x_goal, y_goal, theta_goal):
+        x, y, theta = self.get_pose()
+	self._error[0]=abs(x-x_goal)
+        self._error[1]=abs(y-y_goal)
+        self._error[2]=abs(geo_maths.pi2pi(theta - theta_goal))
+	msg=Vector3()
+	msg.x=self._error[0]
+	msg.y=self._error[1]
+	msg.z=self._error[2]
+	self._error_pub.publish(msg)	
+
     def _pose_robot2world(self, x_rg, y_rg, theta_rg):
         '''
         Transform the coordinate of a pose `g` (x_rg, y_rg, theta_rg):
@@ -408,10 +424,11 @@ class Turtle(object):
             cnt_steps += 1
 
             x, y, theta = self.get_pose()
-
-            rho = geo_maths.calc_dist(x, y, x_goal, y_goal)
+            distance=1
+            rho = geo_maths.calc_dist(x, y, x_goal, y_goal)-distance
             alpha = geo_maths.pi2pi(math.atan2(y_goal - y, x_goal - x) - theta)
-            beta = geo_maths.pi2pi(theta_goal - theta) - alpha
+            #beta = geo_maths.pi2pi(theta_goal - theta) - alpha
+            beta = geo_maths.pi2pi( - theta) - alpha
 
             # Check moving direction
             sign = 1
@@ -426,6 +443,7 @@ class Turtle(object):
             val_rho = pid_rho.compute(err=rho)[0]
             val_alpha = pid_alpha.compute(err=alpha)[0]
             val_beta = pid_beta.compute(err=beta)[0]
+            self.error(x_goal, y_goal, theta_goal)
 
             # Pure spin:
             #   If the robot is very close to the (x_goal, y_goal),

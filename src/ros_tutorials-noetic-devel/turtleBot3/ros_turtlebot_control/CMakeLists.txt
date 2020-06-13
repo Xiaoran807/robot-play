@@ -138,7 +138,7 @@ target_link_libraries(poseGoal
  )
 
  catkin_install_python(PROGRAMS
-   src/poseGoal.py
+   src/poseGoalBoxtoTurtle.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
 

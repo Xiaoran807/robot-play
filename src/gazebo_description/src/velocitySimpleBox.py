@@ -22,7 +22,7 @@ def main():
     rospy.init_node('set_vel')
     current_time = rospy.Time.now().to_sec()
     last_time = rospy.Time.now().to_sec()
-    x=-5;
+    x=5;
     y=0;
     theta=0;
 

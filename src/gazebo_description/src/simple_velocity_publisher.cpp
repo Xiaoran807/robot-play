@@ -4,6 +4,10 @@
 // pieces of the ROS system. Always we create a new C++ file, we will need to
 // add this include.
 
+/* this can also be done in command window
+rostopic pub -r 10 /cmd_velBox geometry_msgs/TwistStamped  '{header: {stamp: now, frame_id: base_link}, twist: {linear:  {x: -0.1, y: 0, z: 0.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}}'*/
+
+
 int main(int argc, char** argv) {// We start the main C++ program
 
     ros::init(argc, argv, "move_forward");// We initiate a ROS node called topic_publisher

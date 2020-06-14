@@ -425,10 +425,10 @@ class Turtle(object):
 
             x, y, theta = self.get_pose()
             distance=1
-            rho = geo_maths.calc_dist(x, y, x_goal, y_goal)-distance
+            rho = geo_maths.calc_dist(x, y, x_goal, y_goal)
             alpha = geo_maths.pi2pi(math.atan2(y_goal - y, x_goal - x) - theta)
             #beta = geo_maths.pi2pi(theta_goal - theta) - alpha
-            beta = geo_maths.pi2pi( - theta) - alpha
+            beta = geo_maths.pi2pi(theta_goal - theta) - alpha
 
             # Check moving direction
             sign = 1
@@ -450,6 +450,7 @@ class Turtle(object):
             #   enalbe pure spin.
             if not is_pure_spin:
                 if self.is_close_to_target(x_goal, y_goal):
+             
                     is_pure_spin = True
             if is_pure_spin and IS_THETA_CONSIDERED:
                 sign = 1  # Default to be forward.

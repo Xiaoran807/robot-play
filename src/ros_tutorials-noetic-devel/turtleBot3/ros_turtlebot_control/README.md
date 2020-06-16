@@ -1,5 +1,19 @@
 ROS Turtlebot Control
 ========================
+roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch 
+rosrun gazebo_description velocitySimpleBox.py
+rosrun ros_turtlebot_control poseGoalBoxtoTurtle.py
+rosrun ros_turtlebot_control turtlebot_server.py
+
+to change the position of the box
+rostopic pub -r 10 /cmd_velBox geometry_msgs/TwistStamped  '{header: {stamp: now, frame_id: base_link}, twist: {linear:  {x: 0.2, y: 0, z: 0.0}, angular: {x: 0,y: 0.0,z: 0}}}'
+or 
+rosrun gazebo_description simple_velocity_publisher.cpp
+
+
+
+
+
 
 **Demo:** Result of running these two commands:
 ```

@@ -25,7 +25,7 @@ def callback(data):
     theta_wg=Float32();
     pose=geo_maths.pose_to_xytheta(data.pose.pose);
     T_wb = geo_maths.xytheta_to_T(pose[0], pose[1], pose[2])  # T_world_to_robot. Using relative pose as in turtle_lib.py
-   # T_bg = xytheta_to_T(-1, 0, 0)  # T_robot_to_goal, robot facing the white small box
+   # T_bg = geo_maths.xytheta_to_T(-1, 0, 0)  # T_robot_to_goal, robot facing the white small box
     T_bg = geo_maths.xytheta_to_T(2, 1, -1.57)  # T_robot_to_goal, robot facing to the side of the simple box
     T_wg = np.dot(T_wb, T_bg)
     x_wg.data, y_wg.data, theta_wg.data = geo_maths.T_to_xytheta(T_wg)

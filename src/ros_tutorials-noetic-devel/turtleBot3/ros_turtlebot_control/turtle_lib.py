@@ -427,7 +427,6 @@ class Turtle(object):
             distance=1
             rho = geo_maths.calc_dist(x, y, x_goal, y_goal)
             alpha = geo_maths.pi2pi(math.atan2(y_goal - y, x_goal - x) - theta)
-            #beta = geo_maths.pi2pi(theta_goal - theta) - alpha
             beta = geo_maths.pi2pi(theta_goal - theta) - alpha
 
             # Check moving direction

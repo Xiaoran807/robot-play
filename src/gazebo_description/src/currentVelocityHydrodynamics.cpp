@@ -5,15 +5,18 @@
 #include <geometry_msgs/TwistStamped.h>
 #include <geometry_msgs/Pose.h>
 #include <geometry_msgs/Twist.h>
+#include <tf/tf.h>
 //I'm going to implement user-specified twist values later.
   std_msgs::Float32 lin_x;
   std_msgs::Float32 lin_y;
   std_msgs::Float32 lin_z;
+  std_msgs::Float32 ang_z;
 void callback(const geometry_msgs::TwistStamped::ConstPtr& msg)
 {
   lin_x.data=msg->twist.linear.x;
   lin_y.data=msg->twist.linear.y;
   lin_z.data=msg->twist.linear.z;
+  ang_z.data=0.1;
 }
 
 
@@ -26,6 +29,7 @@ int main (int argc, char **argv)
   double x=-5;
   double y=0;
   double z=-8;
+  double theta=0;
   ros::Time current_time, last_time;
   current_time=ros::Time::now();
   last_time=ros::Time::now();
@@ -38,20 +42,22 @@ int main (int argc, char **argv)
      double delta_x = lin_x.data * dt;
      double delta_y = lin_y.data * dt;
      double delta_z = lin_z.data * dt;
-
+     double delta_theta = ang_z.data * dt;
      x += delta_x;
      y += delta_y;
      z += delta_z;
+     theta += delta_theta = delta_theta;
+     geometry_msgs::Quaternion odom_quat = tf::createQuaternionMsgFromYaw(theta);
 
      ros::ServiceClient client = n.serviceClient<gazebo_msgs::SetModelState>("/gazebo/set_model_state");
      geometry_msgs::Pose model_pose;
      model_pose.position.x=2*x;
      model_pose.position.y=2*y;
      model_pose.position.z=-8;
-     model_pose.orientation.x=0;
-     model_pose.orientation.y=0;
-     model_pose.orientation.z=0;
-     model_pose.orientation.w=0;
+     model_pose.orientation.x=odom_quat.x;
+     model_pose.orientation.y=odom_quat.y;
+     model_pose.orientation.z=odom_quat.z;
+     model_pose.orientation.w=odom_quat.w;
 
      geometry_msgs::Twist model_twist;
      model_twist.linear.x = 0;

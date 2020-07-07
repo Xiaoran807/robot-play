@@ -24,9 +24,9 @@ def main():
     rospy.init_node('set_vel')
     current_time = rospy.Time.now().to_sec()
     last_time = rospy.Time.now().to_sec()
-    x=-5;
+    x=-20;
     y=0;
-    z=-8;
+    z=-15;
     theta=0;
 
     rate=rospy.Rate(5)

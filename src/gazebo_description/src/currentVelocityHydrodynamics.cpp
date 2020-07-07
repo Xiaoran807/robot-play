@@ -13,12 +13,18 @@
   std_msgs::Float32 ang_z;
 void callback(const geometry_msgs::TwistStamped::ConstPtr& msg)
 {
-  lin_x.data=msg->twist.linear.x;
-  lin_y.data=msg->twist.linear.y;
-  lin_z.data=msg->twist.linear.z;
-  ang_z.data=0.1;
+ // lin_x.data=msg->twist.linear.x;
+ // lin_y.data=msg->twist.linear.y;
 }
 
+void callbackBox(const geometry_msgs::TwistStamped::ConstPtr& msg)
+{
+  ang_z.data=msg->twist.angular.z;
+  lin_z.data=msg->twist.linear.z;
+  lin_x.data=msg->twist.linear.x;
+  lin_y.data=msg->twist.linear.y;
+
+}
 
 int main (int argc, char **argv)
 {
@@ -26,9 +32,10 @@ int main (int argc, char **argv)
   ros::NodeHandle n;
   ros::Rate loop_rate(20);
   ros::Subscriber sub = n.subscribe("/hydrodynamics/current_velocity", 1, callback);
-  double x=-5;
+  ros::Subscriber velBox_sub = n.subscribe("/cmd_velBox", 1, callbackBox);
+  double x=-10; // -10 if 2x, -20 if x
   double y=0;
-  double z=-8;
+  double z=-15;
   double theta=0;
   ros::Time current_time, last_time;
   current_time=ros::Time::now();
@@ -53,7 +60,7 @@ int main (int argc, char **argv)
      geometry_msgs::Pose model_pose;
      model_pose.position.x=2*x;
      model_pose.position.y=2*y;
-     model_pose.position.z=-8;
+     model_pose.position.z=z;
      model_pose.orientation.x=odom_quat.x;
      model_pose.orientation.y=odom_quat.y;
      model_pose.orientation.z=odom_quat.z;
@@ -79,7 +86,7 @@ int main (int argc, char **argv)
   if (client.call(setmodelstate))
   {
     ROS_INFO("BRILLIANT!!!");
-    ROS_INFO("%f, %f, %f, %f",lin_x.data, lin_y.data, lin_z.data, dt);
+   // ROS_INFO("%f, %f, %f, %f",lin_x.data, lin_y.data, lin_z.data, dt);
   }  
   else
   {

@@ -1,4 +1,4 @@
-%clear all
+clear all
 u0=0;
 ac=-1;
 dc=1;
@@ -24,11 +24,13 @@ b2=1/915.5;
 % BigC=[1 0 0;0 0 1];
 % Bdp=[1 0 0]'
 
-BigA=[-1 0 0;0 0 -1; 0 0 a11];
-BigAd=[0 0 0; 0 0 0;0 0 0];
-BigB=[ 0 0 b1]';
-BigC=[0 1 0; 0 0 1];
-Bdp=[0 1 0]';
+
+BigA=[-1 0 0 0 0;0 0 -1 0 0; 0 0 a11 0 a12; 0 0 0 0 -1;0 0 a21 0 a22 ];
+
+BigAd=0*eye(5);
+BigB=[ 0 0  b1 0 0; 0 0 0 0 b2]';
+BigC=[0 1 0 0 0; 0 0 1 0 0; 0 0 0 1 0; 0 0 0 0 1];
+Bdp=[0 1 1 1 1]';
 
 
 AA=BigA;
@@ -65,13 +67,21 @@ Bm=BBd(nn-mm+1:nn,:);
 %BBd=[Bum;Bm];
 
 
-alpha=1.995;
-bbb=1;
-delta=40;
-epsilon=1.001;
-M=.01;%M is some (pp-mm)*(nn-pp)matrix
-hmax=0;
-d=0;
+%  alpha=1.6;
+%  bbb=.01;
+%  delta=30;
+%  epsilon=1.2;
+%  M=[1 .2]';%M is some (pp-mm)*(nn-pp)matrix
+%  hmax=0;
+%  d=0;
+
+ alpha=.1;
+ bbb=1;
+ delta=.3;
+ epsilon=2;
+ M=[1 .2]';%M is some (pp-mm)*(nn-pp)matrix
+ hmax=0;
+ d=0;
 
 
 
@@ -160,8 +170,9 @@ Q22=cQ(nn-pp+1:nn-mm,nn-pp+1:nn-mm);
 Q2=aQ+delta*cQ+[zeros(nn-pp) zeros(nn-pp,pp-mm);Q22*M zeros(pp-mm)];
 P_=inv(Q2)'*P*inv(Q2);
 K=Y*inv(Q22);     
-
+TT=CC1(:,nn-pp+1:nn);
 bound=inv(min(eig(P_)))*bbb/alpha;
+F=[K eye(mm)]*inv(TT)
 
 A_sum=A-B*K*C;
 EG=eig(A_sum)

@@ -1,7 +1,6 @@
 %clear all
-u0=0;
+
 ac=-1;
-dc=1;
 a11=-70/3085;
 a12=-2642.7/3085*u0;
 Y_v_bar=-992/3085;
@@ -11,6 +10,14 @@ a22=-105/915.5;
 N_r_bar=-523.27/915.5;
 b2=1/915.5;
 
+au=-74.82/2642.7;
+bu1=-1/2642.7;
+bu=1/2642.7;
+X_u_bar=-748.22/2642.7;
+
+aw=-728/(1862.87+3660);
+bw=1/(1862.87+3660);
+Z_w_bar=-1821/(1862.87+3660);
 
 % BigA=[-1 -1 -1;0 0 1;0 0 a11];
 % BigAd=[0 0 0;0 0 0;0 0 0];
@@ -24,9 +31,9 @@ b2=1/915.5;
 % BigC=[1 0 0;0 0 1];
 % Bdp=[1 0 0]'
 
-BigA=[-1 0 0;0 0 -1; 0 0 a11];
+BigA=[-1 0 0;0 0 -1; 0 0 aw];
 BigAd=[0 0 0; 0 0 0;0 0 0];
-BigB=[ 0 0 b1]';
+BigB=[ 0 0 bw]';
 BigC=[0 1 0; 0 0 1];
 Bdp=[0 1 0]';
 
@@ -53,26 +60,26 @@ Adf=Tt*Tcan*AAd*inv(Tcan)*inv(Tt);
 Ad=Adf(1:nn-mm,1:nn-mm);
 Bd=Adf(1:nn-mm,nn-mm+1:nn);
 BBd=Tt*Tcan*Bdp;
-%Bumm=BBd(1:n,:);
-%Bum1=norm(Bumm(1,:));
-% Bum2=norm(Bumm(2,:));
-% Bum3=norm(Bumm(3,:));
-% Bum4=norm(Bumm(4,:));
-% Bum5=norm(Bumm(5,:));
-% Bum=[Bum1 Bum2 Bum3 Bum4 Bum5]';
 Bum=BBd(1:nn-mm,:);
 Bm=BBd(nn-mm+1:nn,:);
 %BBd=[Bum;Bm];
 
 
-alpha=1.995;
-bbb=1;
-delta=40;
+% alpha=1.995;
+% bbb=1;
+% delta=40;
+% epsilon=1.001;
+% M=.01;%M is some (pp-mm)*(nn-pp)matrix
+% hmax=0;
+% d=0;
+
+alpha=.1;
+bbb=10;
+delta=4;
 epsilon=1.001;
 M=.01;%M is some (pp-mm)*(nn-pp)matrix
 hmax=0;
 d=0;
-
 
 
 
@@ -159,7 +166,9 @@ Q22=cQ(nn-pp+1:nn-mm,nn-pp+1:nn-mm);
 
 Q2=aQ+delta*cQ+[zeros(nn-pp) zeros(nn-pp,pp-mm);Q22*M zeros(pp-mm)];
 P_=inv(Q2)'*P*inv(Q2);
-K=Y*inv(Q22);     
+K=Y*inv(Q22); 
+TT=CC1(:,nn-pp+1:nn);
+F=[K eye(mm)]*inv(TT)
 
 bound=inv(min(eig(P_)))*bbb/alpha;
 

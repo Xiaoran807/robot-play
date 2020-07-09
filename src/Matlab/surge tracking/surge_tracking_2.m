@@ -115,8 +115,8 @@ A_0=A_-[zeros(nn-mm) zeros(nn-mm,mm);zeros(mm,nn-mm) G2*v_];
 TT=CC1(:,nn-pp+1:nn);
 TT1=CC1*inv(T1);
 Gr=[G1 G2];
-G=Gr*inv(TT1(:,nn-pp+1:nn))
-F=[K 1]*inv(TT);
+G=Gr*inv(TT1(:,nn-pp+1:nn));
+F=[K 1]*inv(TT)
 eA=eig(A_0);
 U=BigA-BigB*G*BigC;
 % Closed-loop eigenvalues.

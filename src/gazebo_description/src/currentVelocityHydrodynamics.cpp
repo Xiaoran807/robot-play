@@ -85,7 +85,7 @@ int main (int argc, char **argv)
      loop_rate.sleep();
   if (client.call(setmodelstate))
   {
-    ROS_INFO("BRILLIANT!!!");
+    //ROS_INFO("BRILLIANT!!!");
    // ROS_INFO("%f, %f, %f, %f",lin_x.data, lin_y.data, lin_z.data, dt);
   }  
   else

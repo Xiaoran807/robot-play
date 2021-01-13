@@ -30,7 +30,7 @@ int main (int argc, char **argv)
 {
   ros::init(argc,argv,"robot_mover_mark_two");
   ros::NodeHandle n;
-  ros::Rate loop_rate(20);
+  ros::Rate loop_rate(500);
   ros::Subscriber sub = n.subscribe("/hydrodynamics/current_velocity", 1, callback);
   ros::Subscriber velBox_sub = n.subscribe("/cmd_velBox", 1, callbackBox);
   double x=-10; // -10 if 2x, -20 if x
@@ -53,7 +53,8 @@ int main (int argc, char **argv)
      x += delta_x;
      y += delta_y;
      z += delta_z;
-     theta += delta_theta = delta_theta;
+     //theta += delta_theta = delta_theta;
+     theta += delta_theta;
      geometry_msgs::Quaternion odom_quat = tf::createQuaternionMsgFromYaw(theta);
 
      ros::ServiceClient client = n.serviceClient<gazebo_msgs::SetModelState>("/gazebo/set_model_state");
